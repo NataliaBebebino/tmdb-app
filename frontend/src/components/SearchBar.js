@@ -13,6 +13,12 @@ const SearchBar = (props) => {
     setEnteredSearch("");
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      searchBarHandler();
+    }
+  };
+
   return (
     <div className="container">
       <div className="row height d-flex justify-content-center align-items-center">
@@ -25,6 +31,7 @@ const SearchBar = (props) => {
               placeholder={props.placeholder}
               value={enteredSearch}
               onChange={searchInputChangeHandler}
+              onKeyDown={handleKeyDown}
             />
             <button className="btn btn-primary" onClick={searchBarHandler}>
               Search

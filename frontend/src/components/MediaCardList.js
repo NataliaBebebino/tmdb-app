@@ -3,13 +3,13 @@ import MediaCard from "./MediaCard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-const MediaCardList = () => {
+const MediaCardList = (props) => {
   return (
     <div className="container">
       <Row xs={2} md={4} className="g-4">
-        {Array.from({ length: 4 }).map((_, idx) => (
-          <Col>
-            <MediaCard />
+        {props.mediaData.map((item) => (
+          <Col key={item.id}>
+            <MediaCard title={item.title} poster_path={item.poster_path} />
           </Col>
         ))}
       </Row>
