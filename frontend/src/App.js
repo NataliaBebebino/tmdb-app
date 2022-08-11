@@ -1,13 +1,13 @@
 import "./App.css";
 import Footer from "./components/Footer";
 import MainNavigation from "./components/MainNavigation";
-import SearchBar from "./components/SearchBar";
+import MoviesPage from "./pages/MoviesPage";
 
 function App() {
   return (
     <div>
       <MainNavigation />
-      <SearchBar />
+      <MoviesPage />
       <Footer />
     </div>
   );
