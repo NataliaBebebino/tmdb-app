@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./components/Footer";
 import MainNavigation from "./components/MainNavigation";
 import SearchBar from "./components/SearchBar";
 
@@ -7,6 +8,7 @@ function App() {
     <div>
       <MainNavigation />
       <SearchBar />
+      <Footer />
     </div>
   );
 }
