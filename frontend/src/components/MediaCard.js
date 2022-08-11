@@ -11,8 +11,8 @@ const MediaCard = (props) => {
       />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
-        <Card.Text>Some text</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Subtitle className="mb-2 text-muted">{`⭐ ${props.vote_average}`}</Card.Subtitle>
+        <Button variant="primary">replace with fav icon</Button>
       </Card.Body>
     </Card>
   );

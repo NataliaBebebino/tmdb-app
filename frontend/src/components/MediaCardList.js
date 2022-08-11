@@ -9,7 +9,11 @@ const MediaCardList = (props) => {
       <Row xs={2} md={4} className="g-4">
         {props.mediaData.map((item) => (
           <Col key={item.id}>
-            <MediaCard title={item.title} poster_path={item.poster_path} />
+            <MediaCard
+              title={item.title}
+              poster_path={item.poster_path}
+              vote_average={item.vote_average}
+            />
           </Col>
         ))}
       </Row>
