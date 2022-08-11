@@ -7,7 +7,9 @@ const MoviesPage = () => {
   const [movieList, setMovieList] = useState([]);
 
   const searchHandler = (enteredSearch) => {
-    console.log("búsqueda", enteredSearch);
+    if (!enteredSearch) {
+      return;
+    }
 
     axios
       .get(
