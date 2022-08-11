@@ -16,7 +16,17 @@ const MoviesPage = () => {
         `https://api.themoviedb.org/3/search/movie?api_key=2e023c6fdb74b3b2d57ea6c91d6c138f&query=${enteredSearch}`
       )
       .then((response) => {
-        setMovieList(response.data.results);
+        let movies = response.data.results.map((item) => {
+          let moviesData = {
+            title: item.title,
+            average: item.vote_average,
+            image: item.poster_path,
+            id: item.id,
+          };
+          return moviesData;
+        });
+
+        setMovieList(movies);
       });
   };
 

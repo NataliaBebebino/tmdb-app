@@ -11,8 +11,8 @@ const MediaCardList = (props) => {
           <Col key={item.id}>
             <MediaCard
               title={item.title}
-              poster_path={item.poster_path}
-              vote_average={item.vote_average}
+              image={item.image}
+              average={item.average}
             />
           </Col>
         ))}
