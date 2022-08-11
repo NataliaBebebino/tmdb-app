@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./SearchBar.module.css";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const [enteredSearch, setEnteredSearch] = useState("");
+
+  const searchInputChangeHandler = (event) => {
+    setEnteredSearch(event.target.value);
+  };
+
+  const searchBarHandler = () => {
+    props.onSearch(enteredSearch);
+    setEnteredSearch("");
+  };
+
   return (
     <div className="container">
       <div className="row height d-flex justify-content-center align-items-center">
@@ -11,9 +22,13 @@ const SearchBar = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Enter name of the movie or TV show"
+              placeholder={props.placeholder}
+              value={enteredSearch}
+              onChange={searchInputChangeHandler}
             />
-            <button className="btn btn-primary">Search</button>
+            <button className="btn btn-primary" onClick={searchBarHandler}>
+              Search
+            </button>
           </div>
         </div>
       </div>
