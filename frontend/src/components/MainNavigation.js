@@ -1,10 +1,11 @@
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 const MainNavigation = () => {
   return (
-    <Navbar bg="dark" expand="lg" fixed="top" variant="dark">
+    <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="#home">TMDB</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
