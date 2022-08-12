@@ -1,14 +1,13 @@
 import React from "react";
 import MediaCard from "./MediaCard";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import classes from "./MediaCardList.module.css";
 
 const MediaCardList = (props) => {
   return (
     <div className="container">
-      <Row xs={2} md={4} className="g-4">
+      <div className={classes.flexcontainer}>
         {props.mediaData.map((item) => (
-          <Col key={item.id}>
+          <div key={item.id} className={classes.flexitem}>
             <MediaCard
               title={item.title}
               image={item.image}
@@ -16,11 +15,10 @@ const MediaCardList = (props) => {
               id={item.id}
               mediaType={item.mediaType}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     </div>
   );
 };
-
 export default MediaCardList;

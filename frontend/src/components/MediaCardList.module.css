@@ -1,0 +1,12 @@
+.flexcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 25px 25px;
+}
+
+.flexitem {
+  flex-grow: 1;
+}
