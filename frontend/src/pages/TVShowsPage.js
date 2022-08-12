@@ -22,6 +22,7 @@ const TVShowsPage = () => {
             average: item.vote_average,
             image: item.poster_path,
             id: item.id,
+            mediaType: "tvShowsType"
           };
           return tvShowsData;
         });

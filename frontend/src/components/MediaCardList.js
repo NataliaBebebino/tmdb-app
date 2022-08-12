@@ -13,6 +13,8 @@ const MediaCardList = (props) => {
               title={item.title}
               image={item.image}
               average={item.average}
+              id={item.id}
+              mediaType={item.mediaType}
             />
           </Col>
         ))}
