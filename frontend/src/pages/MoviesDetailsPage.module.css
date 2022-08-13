@@ -1,0 +1,26 @@
+.flexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-left: 40px;
+    background-color: black;
+    color: aliceblue;
+  }
+  
+  .imageItem {
+    flex-grow: 1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  .detailItem{
+    flex-grow: 12;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
