@@ -36,7 +36,7 @@ const TVShowsDetailsPage = () => {
         <img
           src={`http://image.tmdb.org/t/p/w500${tvShowsDetails.image}`}
           alt="tv-show-img"
-          className="rounded-5"
+          className="rounded-5 img-fluid"
         />
       </div>
       <div className={classes.detailItem}>
