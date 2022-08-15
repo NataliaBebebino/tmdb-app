@@ -16,7 +16,7 @@ const MainNavigation = () => {
           </Nav>
           <Nav className="justify-content-end">
             <Nav.Link href="/">SignUp</Nav.Link>
-            <Nav.Link href="/">Login</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
