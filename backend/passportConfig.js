@@ -4,28 +4,25 @@ const localStrategy = require("passport-local").Strategy;
 
 module.exports = function (passport) {
   passport.use(
-    new localStrategy((email, password, done) => {
-      done(null, {
-        email: email,
-        password: password,
-      });
-      //   User.findOne({ where: { email: email } })
-      //     .then((res) => {
-      //       console.log("dentro de then");
-      //       if (!res) {
-      //         done(null, false);
-      //         return;
-      //       }
-      //       let user = res.dataValues;
-      //       bcrypt.compare(password, user.password).then((isValid) => {
-      //         if (isValid) done(null, user);
-      //         else done(null, false);
-      //       });
-      //     })
-      //     .catch((err) => {
-      //       console.log("dentro de catch");
-      //       done(err);
-      //     });
+    new localStrategy({
+      usernameField: 'email',
+      passwordField: 'password'
+    },(email, password, done) => {
+        User.findOne({ where: { email: email } })
+          .then((res) => {
+            if (!res) {
+              done(null, false, {message: "User was not found"});
+              return;
+            }
+            let user = res.dataValues;
+            bcrypt.compare(password, user.password).then((isValid) => {
+              if (isValid) done(null, user);
+              else done(null, false, {message: "Incorrect password"});
+            });
+          })
+          .catch((err) => {
+            done(err);
+          });
     })
   );
 

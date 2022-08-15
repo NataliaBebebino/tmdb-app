@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Axios from "axios";
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -17,12 +18,15 @@ const LoginPage = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const enteredData = {
-      email: enteredEmail,
-      password: enteredPassword,
-    };
-
-    console.log(enteredData);
+    Axios({
+      method: "POST",
+      data: {
+        email: enteredEmail,
+        password: enteredPassword,
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/users/login",
+    }).then((res) => console.log(res));
   };
 
   return (

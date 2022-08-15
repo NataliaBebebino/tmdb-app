@@ -7,18 +7,20 @@ router.post("/new", userController.createUser);
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log("error: ", err);
-    console.log("user: ", user);
-    console.log("info: ", info);
-    if (err) throw err;
-    if (!user) res.send("No user exists");
-    else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.send("Successfully authenticated");
-        console.log(req.user);
+    if (err || !user) {
+      res.send({
+        user: null,
+        message: err ? err.message : info ? info.message : "",
       });
+      return;
     }
+    req.logIn(user, (err) => {
+      var response = {
+        user: req.user,
+        message: err ? err.message : "",
+      };
+      res.send(response);
+    });
   })(req, res, next);
 });
 
