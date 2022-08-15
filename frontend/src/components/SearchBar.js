@@ -33,7 +33,7 @@ const SearchBar = (props) => {
               onChange={searchInputChangeHandler}
               onKeyDown={handleKeyDown}
             />
-            <button className="btn btn-primary" onClick={searchBarHandler}>
+            <button className="btn btn-dark" onClick={searchBarHandler}>
               Search
             </button>
           </div>
