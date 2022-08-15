@@ -24,4 +24,6 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+router.post("/logout", userController.logout);
+
 module.exports = router;

@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
+import UserContext from "../store/users-context";
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const userCtx = useContext(UserContext);
 
   const emailInputChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -26,7 +30,14 @@ const LoginPage = () => {
       },
       withCredentials: true,
       url: "http://localhost:5000/users/login",
-    }).then((res) => console.log(res));
+    }).then((res) => {
+      console.log(res);
+      if (res.data.user) {
+        userCtx.login(res.data.user);
+      } else {
+        setErrorMessage(res.data.message);
+      }
+    });
   };
 
   return (
@@ -54,6 +65,7 @@ const LoginPage = () => {
           onChange={passwordInputChangeHandler}
         />
       </Form.Group>
+      <p>{errorMessage}</p>
 
       {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />

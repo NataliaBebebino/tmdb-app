@@ -12,12 +12,12 @@ const createUser = async (req, res) => {
   res.send(newUser);
 };
 
-const loginUser = (req, res) => {
-  res.send("login successful");
+const logout = (req, res) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 };
 
-const loginUserIncorrect = (req, res) => {
-  res.send("login incorrect");
-};
 
-module.exports = { createUser, loginUser, loginUserIncorrect };
+module.exports = { createUser, logout };
