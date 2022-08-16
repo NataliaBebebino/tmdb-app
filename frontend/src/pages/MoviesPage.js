@@ -22,7 +22,7 @@ const MoviesPage = () => {
             average: item.vote_average,
             image: item.poster_path,
             id: item.id,
-            mediaType: "moviesType"
+            mediaType: "movie",
           };
           return moviesData;
         });

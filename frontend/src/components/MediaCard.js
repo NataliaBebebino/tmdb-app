@@ -3,13 +3,30 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import UserContext from "../store/users-context";
+import Axios from "axios";
 
 const MediaCard = (props) => {
   const userCtx = useContext(UserContext);
 
+  const addToFavoritesHandler = (event) => {
+    event.preventDefault(); // take a look at this line of code later
+
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: props.id,
+        type: props.mediaType,
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/new",
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <Link
-      to={`${props.mediaType === "moviesType" ? "/movies/" : "/tv-shows/"}${
+      to={`${props.mediaType === "movie" ? "/movies/" : "/tv-shows/"}${
         props.id
       }`}
     >
@@ -26,7 +43,10 @@ const MediaCard = (props) => {
               <Card.Subtitle className="mb-2 text-muted">{`Ranking: ${props.average} ⭐`}</Card.Subtitle>
 
               {userCtx.isAuthenticated ? (
-                <Button className="btn btn-danger">
+                <Button
+                  className="btn btn-danger"
+                  onClick={addToFavoritesHandler}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

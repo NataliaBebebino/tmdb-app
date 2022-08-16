@@ -8,7 +8,7 @@ const Favorite = sequelize.define("favorites", {
   },
 
   type: {
-    type: DataTypes.ENUM("movie", "tv-show"),
+    type: DataTypes.ENUM("movie", "tv"),
     allowNull: false,
   },
 });
