@@ -43,7 +43,8 @@ const MainNavigation = () => {
           <Nav className="justify-content-end">
             {userCtx.isAuthenticated ? (
               <>
-                <Nav.Link className="link-ligh text-decoration-nonet" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} onClick={logoutHandler}>Logout</Nav.Link>
+                <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/favorites">Favorites</Link>
+                <Nav.Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} onClick={logoutHandler}>Logout</Nav.Link>
               </>
             ) : (
               <>
