@@ -37,18 +37,18 @@ const MainNavigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/movies">Movies</Link>
-            <Link to="/tv-shows">TV Shows</Link>
+          <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/movies">Movies</Link>
+          <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/tv-shows">TV Shows</Link>
           </Nav>
           <Nav className="justify-content-end">
             {userCtx.isAuthenticated ? (
               <>
-                <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+                <Nav.Link className="link-ligh text-decoration-nonet" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} onClick={logoutHandler}>Logout</Nav.Link>
               </>
             ) : (
               <>
-                <Link to="/signup">SignUp</Link>
-                <Link to="/login">Login</Link>
+                <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/signup">SignUp</Link>
+                <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/login">Login</Link>
               </>
             )}
           </Nav>
