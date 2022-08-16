@@ -4,12 +4,23 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import UserContext from "../store/users-context";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 const MainNavigation = () => {
   const userCtx = useContext(UserContext);
 
   const logoutHandler = () => {
-    userCtx.logout();
+    Axios({
+      method: "POST",
+      url: "http://localhost:5000/users/logout",
+    })
+      .then((res) => {
+        console.log(res);
+        userCtx.logout();
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+      });
   };
 
   return (
@@ -17,13 +28,12 @@ const MainNavigation = () => {
       <Container>
         <Navbar.Brand href="/">TMDB</Navbar.Brand>
         {userCtx.isAuthenticated ? (
-              <>
-                <Navbar.Text>{`Hello ${userCtx.user.userName}!`}</Navbar.Text>          
-              </>
-            ) : (
-              <>
-              </>
-            )}
+          <>
+            <Navbar.Text>{`Hello ${userCtx.user.userName}!`}</Navbar.Text>
+          </>
+        ) : (
+          <></>
+        )}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -32,7 +42,7 @@ const MainNavigation = () => {
           </Nav>
           <Nav className="justify-content-end">
             {userCtx.isAuthenticated ? (
-              <>               
+              <>
                 <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
               </>
             ) : (

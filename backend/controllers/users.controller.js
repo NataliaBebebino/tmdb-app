@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
 const logout = (req, res) => {
   req.logout(function(err) {
     if (err) { return next(err); }
-    res.redirect('/');
+    res.send('ok');
   });
 };
 
