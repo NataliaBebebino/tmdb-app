@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import UserContext from "../store/users-context";
+import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -10,6 +11,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const userCtx = useContext(UserContext);
+  const navigate = useNavigate()
 
   const emailInputChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -21,7 +23,6 @@ const LoginPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     Axios({
       method: "POST",
       data: {
@@ -34,6 +35,7 @@ const LoginPage = () => {
       console.log(res);
       if (res.data.user) {
         userCtx.login(res.data.user);
+        navigate("/");
       } else {
         setErrorMessage(res.data.message);
       }
@@ -41,40 +43,37 @@ const LoginPage = () => {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          value={enteredEmail}
-          onChange={emailInputChangeHandler}
-        />
+    <div class="container h-100 mt-3">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+          <Form style={{ maxWidth: 500 }} onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={enteredEmail}
+                onChange={emailInputChangeHandler}
+              />
+            </Form.Group>
 
-        {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={enteredPassword}
-          onChange={passwordInputChangeHandler}
-        />
-      </Form.Group>
-      <p>{errorMessage}</p>
-
-      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
-
-      <Button className="btn btn-dark" variant="primary" type="submit">
-        Login
-      </Button>
-    </Form>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={enteredPassword}
+                onChange={passwordInputChangeHandler}
+              />
+            </Form.Group>
+            <p className="text-danger">{errorMessage}</p>
+            <Button className="btn btn-dark" variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+        </div>
+      </div>
+    </div>
   );
 };
 
