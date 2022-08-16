@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import UserContext from "../store/users-context";
+import { Link } from "react-router-dom";
 
 const MainNavigation = () => {
   const userCtx = useContext(UserContext);
@@ -26,8 +27,8 @@ const MainNavigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/movies">Movies</Nav.Link>
-            <Nav.Link href="/tv-shows">TV Shows</Nav.Link>
+            <Link to="/movies">Movies</Link>
+            <Link to="/tv-shows">TV Shows</Link>
           </Nav>
           <Nav className="justify-content-end">
             {userCtx.isAuthenticated ? (
@@ -36,8 +37,8 @@ const MainNavigation = () => {
               </>
             ) : (
               <>
-                <Nav.Link href="/">SignUp</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
+                <Link to="/">SignUp</Link>
+                <Link to="/login">Login</Link>
               </>
             )}
           </Nav>

@@ -1,5 +1,7 @@
 const User = require("./User");
-//Here I will require Favorite model as well and the I will export it so that I can require it in server.js
+const Favorite = require("./Favorite");
 
+User.hasMany(Favorite);
+Favorite.belongsTo(User);
 
-module.exports = { User };
+module.exports = { User, Favorite };

@@ -41,7 +41,7 @@ app.use("/", routes);
 async function main() {
   try {
     await sequelize.sync({ force: false });
-    app.listen(5000);
+    app.listen(5000);false
     console.log("Server is listening on port", 5000);
   } catch (error) {
     console.error("Unable to connect to the database", error);
