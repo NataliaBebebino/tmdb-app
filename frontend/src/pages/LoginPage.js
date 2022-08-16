@@ -32,7 +32,6 @@ const LoginPage = () => {
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => {
-      console.log(res);
       if (res.data.user) {
         userCtx.login(res.data.user);
         navigate("/");
@@ -43,9 +42,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div class="container h-100 mt-3">
-      <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-10 col-md-8 col-lg-6">
+    <div className="container h-100 mt-3">
+      <div className="row h-100 justify-content-center align-items-center">
+        <div className="col-10 col-md-8 col-lg-6">
           <Form style={{ maxWidth: 500 }} onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>

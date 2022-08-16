@@ -1,13 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import Axios from "axios";
+import UserContext from "../store/users-context";
 import classes from "./MoviesDetailsPage.module.css";
 
 const MoviesDetailsPage = () => {
   const [moviesDetails, setMoviesDetails] = useState({});
+  const [isFavourite, setIsFavourite] = useState(false);
 
   const params = useParams();
+  const userCtx = useContext(UserContext);
+
+  const addToFavoritesHandler = (event) => {
+    event.preventDefault(); // take a look at this line of code later
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "movie",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/new",
+    }).then((res) => {
+      setIsFavourite(true);
+    });
+  };
+
+
+  const removeFavoriteHandler = (event) => {
+    event.preventDefault(); // take a look at this line of code later
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "movie",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/remove",
+    }).then((res) => {
+      setIsFavourite(false);
+    });
+  };
+
+  useEffect(() => {
+    if (!userCtx.isAuthenticated) return;
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "movie",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/isFavorite",
+    }).then((res) => {
+      setIsFavourite(res.data);
+    });
+  }, [params.id]);
 
   useEffect(() => {
     axios
@@ -48,7 +97,31 @@ const MoviesDetailsPage = () => {
         />
       </div>
       <div className={classes.detailItem}>
-        <h1>{moviesDetails.title}</h1>
+        <div className={classes.flexRow}>
+          <div className={classes.flexRowLeft}>
+            <h1>{moviesDetails.title}</h1>
+          </div>
+
+          {userCtx.isAuthenticated ? (
+            <div className={classes.flexRowRigth}>
+              {isFavourite ? (
+                <button type="button" className="btn btn-danger" onClick={removeFavoriteHandler}>
+                  Delete Favorite
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={addToFavoritesHandler}
+                  className="btn btn-success"
+                >
+                  Add Favorite
+                </button>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
         <h6 className="fst-italic">{moviesDetails.genreNames}</h6>
         <div>
           <p>{moviesDetails.synopsis}</p>
