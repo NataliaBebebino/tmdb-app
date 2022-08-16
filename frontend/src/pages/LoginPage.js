@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import UserContext from "../store/users-context";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -11,7 +11,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const userCtx = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const emailInputChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -32,11 +32,11 @@ const LoginPage = () => {
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => {
-      if (res.data.user) {
+      if (res.data.ok) {
         userCtx.login(res.data.user);
         navigate("/");
       } else {
-        setErrorMessage(res.data.message);
+        setErrorMessage(res.data.error);
       }
     });
   };

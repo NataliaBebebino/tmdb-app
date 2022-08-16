@@ -38,6 +38,14 @@ require("./passportConfig")(passport);
 
 app.use("/", routes);
 
+/* Start Error handling middleware*/
+app.use((err, req, res, next) => {
+  console.log('Error');
+  console.log(err);
+  res.status(500).send(err.message);
+});
+/* End Error handling middleware*/
+
 async function main() {
   try {
     await sequelize.sync({ force: false });

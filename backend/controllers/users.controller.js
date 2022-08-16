@@ -1,23 +1,35 @@
 const User = require("../models/User");
 
-const createUser = async (req, res) => {
+const createUser = (req, res) => {
   const { userName, password, email } = req.body;
 
-  const newUser = await User.create({
+  User.create({
     userName,
     password,
     email,
-  });
-
-  res.send(newUser);
+  })
+    .then((newUser) => {
+      res.send({
+        ok: true,
+        user: newUser,
+      });
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+      res.send({
+        ok: false,
+        error: error.message,
+      });
+    });
 };
 
 const logout = (req, res) => {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.send('ok');
+  req.logout(function (err) {
+    if (err) {
+      return res.send({ ok: false, error: err.message });
+    }
+    res.send({ ok: true });
   });
 };
-
 
 module.exports = { createUser, logout };

@@ -52,31 +52,31 @@ const SignUpPage = () => {
     Axios({
       method: "POST",
       data: {
-        username: enteredUsername,
+        userName: enteredUsername,
         email: enteredEmail,
         password: enteredPassword,
       },
       withCredentials: true,
-      url: "http://localhost:5000/users/login",
+      url: "http://localhost:5000/users/new",
     })
       .then((res) => {
         console.log(res);
-        if (res.data.user) {
-          userCtx.login(res.data.user);
-          navigate("/");
+
+        if (res.data.ok) {
+          navigate("/login");
         } else {
-          setErrorMessage(res.data.message);
+          setErrorMessage(res.data.error);
         }
       })
       .catch((error) => {
-        console.log(error);
+        setErrorMessage(error.message);
       });
   };
 
   return (
-    <div class="container h-100 mt-3">
-      <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-10 col-md-8 col-lg-6">
+    <div className="container h-100 mt-3">
+      <div className="row h-100 justify-content-center align-items-center">
+        <div className="col-10 col-md-8 col-lg-6">
           <Form style={{ maxWidth: 500 }} onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicUsername">
               <Form.Label>User name</Form.Label>

@@ -9,15 +9,16 @@ router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err || !user) {
       res.send({
-        user: null,
-        message: err ? err.message : info ? info.message : "",
+        ok: false,
+        error: err ? err.message : info ? info.message : "",
       });
       return;
     }
     req.logIn(user, (err) => {
       var response = {
+        ok: req.user ? true : false,
         user: req.user,
-        message: err ? err.message : "",
+        error: err ? err.message : "",
       };
       res.send(response);
     });
