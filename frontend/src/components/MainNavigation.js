@@ -47,7 +47,7 @@ const MainNavigation = () => {
               </>
             ) : (
               <>
-                <Link to="/">SignUp</Link>
+                <Link to="/signup">SignUp</Link>
                 <Link to="/login">Login</Link>
               </>
             )}
