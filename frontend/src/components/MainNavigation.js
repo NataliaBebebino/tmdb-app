@@ -29,7 +29,7 @@ const MainNavigation = () => {
         <Navbar.Brand href="/">TMDB</Navbar.Brand>
         {userCtx.isAuthenticated ? (
           <>
-            <Navbar.Text>{`Hello ${userCtx.user.userName}!`}</Navbar.Text>
+            <Navbar.Text className="text-info" style={{marginLeft: '0.3rem',marginRight: '1rem'}} >{`Hello ${userCtx.user.userName}! 👋`}</Navbar.Text>
           </>
         ) : (
           <></>
@@ -44,7 +44,7 @@ const MainNavigation = () => {
             {userCtx.isAuthenticated ? (
               <>
                 <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/favorites">Favorites</Link>
-                <Nav.Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} onClick={logoutHandler}>Logout</Nav.Link>
+                <Link className="link-light text-decoration-none" style={{marginLeft: '0.3rem',marginRight: '0.3rem' }} to="/" onClick={logoutHandler}>Logout</Link>
               </>
             ) : (
               <>
