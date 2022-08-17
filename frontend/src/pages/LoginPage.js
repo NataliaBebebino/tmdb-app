@@ -31,14 +31,18 @@ const LoginPage = () => {
       },
       withCredentials: true,
       url: "http://localhost:5000/users/login",
-    }).then((res) => {
-      if (res.data.ok) {
-        userCtx.login(res.data.user);
-        navigate("/");
-      } else {
-        setErrorMessage(res.data.error);
-      }
-    });
+    })
+      .then((res) => {
+        if (res.data.ok) {
+          userCtx.login(res.data.user);
+          navigate("/");
+        } else {
+          setErrorMessage(res.data.error);
+        }
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   return (
