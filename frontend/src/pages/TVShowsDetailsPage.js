@@ -1,12 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import UserContext from "../store/users-context";
 import classes from "./MoviesDetailsPage.module.css";
+import Axios from "axios";
 
 const TVShowsDetailsPage = () => {
   const [tvShowsDetails, setTvShowsDetails] = useState({});
+  const [isFavourite, setIsFavourite] = useState(false);
 
   const params = useParams();
+  const userCtx = useContext(UserContext);
+
+  const addToFavoritesHandler = (event) => {
+    event.preventDefault(); // take a look at this line of code later
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "tv",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/new",
+    }).then((res) => {
+      setIsFavourite(true);
+    });
+  };
+
+  const removeFavoriteHandler = (event) => {
+    event.preventDefault(); // take a look at this line of code later
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "tv",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/remove",
+    }).then((res) => {
+      setIsFavourite(false);
+    });
+  };
+
+  useEffect(() => {
+    if (!userCtx.isAuthenticated) return;
+    Axios({
+      method: "POST",
+      data: {
+        mediaId: params.id,
+        type: "tv",
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/favorites/isFavorite",
+    }).then((res) => {
+      setIsFavourite(res.data);
+    });
+  }, [params.id]);
 
   useEffect(() => {
     axios
@@ -22,7 +71,7 @@ const TVShowsDetailsPage = () => {
 
         setTvShowsDetails({
           image: response.data.backdrop_path,
-          title: response.data.original_name,
+          title: response.data.original_title,
           synopsis: response.data.overview,
           average: response.data.vote_average,
           genreNames: genreNames,
@@ -40,10 +89,40 @@ const TVShowsDetailsPage = () => {
         />
       </div>
       <div className={classes.detailItem}>
-        <h1>{tvShowsDetails.title}</h1>
+        <div className={classes.flexRow}>
+          <div className={classes.flexRowLeft}>
+            <h1>{tvShowsDetails.title}</h1>
+          </div>
+
+          {userCtx.isAuthenticated ? (
+            <div className={classes.flexRowRigth}>
+              {isFavourite ? (
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={removeFavoriteHandler}
+                >
+                  Delete Favorite
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={addToFavoritesHandler}
+                  className="btn btn-success"
+                >
+                  Add Favorite
+                </button>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
         <h6 className="fst-italic">{tvShowsDetails.genreNames}</h6>
-        <p>{tvShowsDetails.synopsis}</p>
-        <span>{`⭐ ${Math.round(tvShowsDetails.average * 10) / 10}`}</span>
+        <div>
+          <p>{tvShowsDetails.synopsis}</p>
+        </div>
+        <div>{`⭐ ${Math.round(tvShowsDetails.average * 10) / 10}`}</div>
       </div>
     </div>
   );
