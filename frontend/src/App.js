@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import { MovieSearchContextProvider } from "./store/search-movie-context";
+import { TvShowSearchContextProvider } from "./store/search-tv-show-context";
 
 function App() {
   return (
@@ -21,8 +22,12 @@ function App() {
           <Route path="/movies" element={<MoviesPage />} />
         </Routes>
       </MovieSearchContextProvider>
+      <TvShowSearchContextProvider>
+        <Routes>
+          <Route path="/tv-shows" element={<TVShowsPage />} />
+        </Routes>
+      </TvShowSearchContextProvider>
       <Routes>
-        <Route path="/tv-shows" element={<TVShowsPage />} />
         <Route path="/movies/:id" element={<MoviesDetailsPage />} />
         <Route path="/tv-shows/:id" element={<TVShowsDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />

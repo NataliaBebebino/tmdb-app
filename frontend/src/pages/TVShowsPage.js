@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState , useEffect} from "react";
 import MediaCardList from "../components/MediaCardList";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
+import TvShowSearchContext from "../store/search-tv-show-context";
 
 const TVShowsPage = () => {
   const [tvShowList, setTvShowList] = useState([]);
+  const tvShowSearchCtx = useContext(TvShowSearchContext)
 
-  const searchHandler = (enteredSearch) => {
+  const searchTvShow = (enteredSearch) => {
     if (!enteredSearch) {
       return;
     }
@@ -31,6 +33,15 @@ const TVShowsPage = () => {
       });
   };
 
+  const searchHandler = (enteredSearch) => {
+    tvShowSearchCtx.changeTvShowSearch(enteredSearch);
+    searchTvShow(enteredSearch);
+  };
+
+  useEffect(() => {
+    searchTvShow(tvShowSearchCtx.tvShowSearch);
+  }, []);
+  
   return (
     <div>
       <h1>TV Shows</h1>
