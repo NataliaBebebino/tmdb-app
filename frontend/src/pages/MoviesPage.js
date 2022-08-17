@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import MediaCardList from "../components/MediaCardList";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
+import MovieSearchContext from "../store/search-movie-context";
 
 const MoviesPage = () => {
   const [movieList, setMovieList] = useState([]);
+  const movieSearchCtx = useContext(MovieSearchContext);
 
-  const searchHandler = (enteredSearch) => {
+  const searchMovies = (enteredSearch) => {
     if (!enteredSearch) {
       return;
     }
@@ -30,6 +32,15 @@ const MoviesPage = () => {
         setMovieList(movies);
       });
   };
+
+  const searchHandler = (enteredSearch) => {
+    movieSearchCtx.changeMovieSearch(enteredSearch);
+    searchMovies(enteredSearch);
+  };
+
+  useEffect(() => {
+    searchMovies(movieSearchCtx.movieSearch);
+  }, []);
 
   return (
     <div>
