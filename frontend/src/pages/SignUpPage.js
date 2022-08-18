@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
-import UserContext from "../store/users-context";
 import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
@@ -12,7 +11,6 @@ const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({});
 
-  const userCtx = useContext(UserContext);
   const navigate = useNavigate();
 
   const usernameInputChangeHandler = (event) => {
@@ -76,6 +74,7 @@ const SignUpPage = () => {
   return (
     <div className="container h-100 mt-3">
       <div className="row h-100 justify-content-center align-items-center">
+        <h1 className="text-center">SignUp</h1>
         <div className="col-10 col-md-8 col-lg-6">
           <Form style={{ maxWidth: 500 }} onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicUsername">
