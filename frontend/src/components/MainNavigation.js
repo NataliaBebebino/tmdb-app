@@ -17,12 +17,8 @@ const MainNavigation = () => {
       url: "http://localhost:5000/users/logout",
     })
       .then((res) => {
-        console.log(res);
         userCtx.logout();
       })
-      .catch(function (error) {
-        console.log(error.toJSON());
-      });
   };
 
   return (

@@ -40,7 +40,6 @@ app.use("/", routes);
 
 /* Start Error handling middleware*/
 app.use((err, req, res, next) => {
-  console.log('Error');
   console.log(err);
   res.status(500).send(err.message);
 });
@@ -49,7 +48,8 @@ app.use((err, req, res, next) => {
 async function main() {
   try {
     await sequelize.sync({ force: false });
-    app.listen(5000);false
+    app.listen(5000);
+    false;
     console.log("Server is listening on port", 5000);
   } catch (error) {
     console.error("Unable to connect to the database", error);

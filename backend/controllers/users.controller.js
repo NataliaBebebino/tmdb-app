@@ -15,7 +15,6 @@ const createUser = (req, res) => {
       });
     })
     .catch((error) => {
-      console.log("error: ", error);
       res.send({
         ok: false,
         error: error.message,
