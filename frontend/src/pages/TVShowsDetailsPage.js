@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import UserContext from "../store/users-context";
 import classes from "./MoviesDetailsPage.module.css";
 import Axios from "axios";
+import posterNotAvailableDetailPage from "../assets/posterNotAvailableDetailPage.jpg";
 
 const TVShowsDetailsPage = () => {
   const [tvShowsDetails, setTvShowsDetails] = useState({});
@@ -55,7 +56,7 @@ const TVShowsDetailsPage = () => {
     }).then((res) => {
       setIsFavourite(res.data);
     });
-  }, [params.id]);
+  }, [params.id, userCtx.isAuthenticated]);
 
   useEffect(() => {
     axios
@@ -86,7 +87,7 @@ const TVShowsDetailsPage = () => {
     <div className={`${classes.flexcontainer} rounded-5`}>
       <div className={classes.imageItem}>
         <img
-          src={`http://image.tmdb.org/t/p/w500${tvShowsDetails.image}`}
+          src={tvShowsDetails.image? `http://image.tmdb.org/t/p/w500${tvShowsDetails.image}`: posterNotAvailableDetailPage}
           alt="tv-show-img"
           className="rounded-5 img-fluid"
         />
