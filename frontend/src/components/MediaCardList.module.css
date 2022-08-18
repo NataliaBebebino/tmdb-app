@@ -1,12 +1,12 @@
 .flexcontainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 25px 25px;
+  gap: 40px 40px;
 }
 
 .flexitem {
-  flex-grow: 1;
+  flex-grow: 0;
 }
