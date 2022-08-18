@@ -17,23 +17,19 @@ function App() {
     <div className="d-flex flex-column min-vh-100">
       <MainNavigation />
       <MovieSearchContextProvider>
-        <Routes>
-          <Route path="/" element={<MoviesPage />} />
-          <Route path="/movies" element={<MoviesPage />} />
-        </Routes>
+        <TvShowSearchContextProvider>
+          <Routes>
+            <Route path="/" element={<MoviesPage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/tv-shows" element={<TVShowsPage />} />
+            <Route path="/movies/:id" element={<MoviesDetailsPage />} />
+            <Route path="/tv-shows/:id" element={<TVShowsDetailsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+          </Routes>
+        </TvShowSearchContextProvider>
       </MovieSearchContextProvider>
-      <TvShowSearchContextProvider>
-        <Routes>
-          <Route path="/tv-shows" element={<TVShowsPage />} />
-        </Routes>
-      </TvShowSearchContextProvider>
-      <Routes>
-        <Route path="/movies/:id" element={<MoviesDetailsPage />} />
-        <Route path="/tv-shows/:id" element={<TVShowsDetailsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-      </Routes>
       <div className="mt-auto">
         <Footer />
       </div>
