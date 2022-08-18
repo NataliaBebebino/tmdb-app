@@ -71,10 +71,13 @@ const TVShowsDetailsPage = () => {
 
         setTvShowsDetails({
           image: response.data.backdrop_path,
-          title: response.data.original_title,
+          title: response.data.original_name,
           synopsis: response.data.overview,
           average: response.data.vote_average,
           genreNames: genreNames,
+          numberOfSeasons: response.data.number_of_seasons,
+          numberOfEpisodes: response.data.number_of_episodes,
+          release_date: response.data.first_air_date,
         });
       });
   }, [params.id]);
@@ -123,6 +126,8 @@ const TVShowsDetailsPage = () => {
           <p>{tvShowsDetails.synopsis}</p>
         </div>
         <div>{`⭐ ${Math.round(tvShowsDetails.average * 10) / 10}`}</div>
+        <div>{`📅 ${tvShowsDetails.release_date}`}</div>
+        <div>{`📺 ${tvShowsDetails.numberOfSeasons} ${tvShowsDetails.numberOfSeasons>1? "seasons": "season"} / ${tvShowsDetails.numberOfEpisodes} ${tvShowsDetails.numberOfEpisodes>1? "episodes": "episode"}`}</div>
       </div>
     </div>
   );
