@@ -17,7 +17,7 @@ const FavoritesPage = () => {
 
   return (
     <div>
-      <h1>My favorites</h1>
+      <h1 className="text-center mt-3 mb-3">My favorites</h1>
       <MediaCardList mediaData={favorites} />
     </div>
   );

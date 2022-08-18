@@ -35,16 +35,15 @@ const MoviesPage = () => {
 
   const searchHandler = (enteredSearch) => {
     movieSearchCtx.changeMovieSearch(enteredSearch);
-    searchMovies(enteredSearch);
   };
 
   useEffect(() => {
     searchMovies(movieSearchCtx.movieSearch);
-  }, []);
+  }, [movieSearchCtx.movieSearch]);
 
   return (
     <div>
-      <h1>Movies</h1>
+      <h1 className="text-center mt-3 mb-3">Movies</h1>
       <SearchBar
         placeholder={"Enter name of the movie"}
         onSearch={searchHandler}

@@ -1,4 +1,4 @@
-import React, { useContext, useState , useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MediaCardList from "../components/MediaCardList";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
@@ -6,7 +6,7 @@ import TvShowSearchContext from "../store/search-tv-show-context";
 
 const TVShowsPage = () => {
   const [tvShowList, setTvShowList] = useState([]);
-  const tvShowSearchCtx = useContext(TvShowSearchContext)
+  const tvShowSearchCtx = useContext(TvShowSearchContext);
 
   const searchTvShow = (enteredSearch) => {
     if (!enteredSearch) {
@@ -35,16 +35,16 @@ const TVShowsPage = () => {
 
   const searchHandler = (enteredSearch) => {
     tvShowSearchCtx.changeTvShowSearch(enteredSearch);
-    searchTvShow(enteredSearch);
+    //searchTvShow(enteredSearch);
   };
 
   useEffect(() => {
     searchTvShow(tvShowSearchCtx.tvShowSearch);
-  }, []);
-  
+  }, [tvShowSearchCtx.tvShowSearch]);
+
   return (
     <div>
-      <h1>TV Shows</h1>
+      <h1 className="text-center mt-3 mb-3">TV Shows</h1>
       <SearchBar
         placeholder={"Enter name of the TV show"}
         onSearch={searchHandler}
