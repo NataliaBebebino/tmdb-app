@@ -22,20 +22,8 @@
   margin: 10px;
 }
 
-.flexRow {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  background-color: black;
-  color: aliceblue;
-}
-
-.flexRowLeft {
-  flex-grow: 12;
-}
-
-.flexRowRigth{
+.favoriteItem {
   flex-grow: 1;
+  margin: 10px;
+  align-self: flex-start;
 }

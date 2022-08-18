@@ -58,8 +58,6 @@ const SignUpPage = () => {
       url: "http://localhost:5000/users/new",
     })
       .then((res) => {
-        console.log(res);
-
         if (res.data.ok) {
           navigate("/login");
         } else {

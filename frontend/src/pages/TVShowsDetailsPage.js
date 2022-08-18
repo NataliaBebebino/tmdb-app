@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import UserContext from "../store/users-context";
-import classes from "./MoviesDetailsPage.module.css";
+import classes from "./DetailsPage.module.css";
 import Axios from "axios";
 import posterNotAvailableDetailPage from "../assets/posterNotAvailableDetailPage.jpg";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const TVShowsDetailsPage = () => {
   const [tvShowsDetails, setTvShowsDetails] = useState({});
@@ -87,49 +88,60 @@ const TVShowsDetailsPage = () => {
     <div className={`${classes.flexcontainer} rounded-5`}>
       <div className={classes.imageItem}>
         <img
-          src={tvShowsDetails.image? `http://image.tmdb.org/t/p/w500${tvShowsDetails.image}`: posterNotAvailableDetailPage}
+          src={
+            tvShowsDetails.image
+              ? `http://image.tmdb.org/t/p/w500${tvShowsDetails.image}`
+              : posterNotAvailableDetailPage
+          }
           alt="tv-show-img"
           className="rounded-5 img-fluid"
         />
       </div>
       <div className={classes.detailItem}>
-        <div className={classes.flexRow}>
-          <div className={classes.flexRowLeft}>
-            <h1>{tvShowsDetails.title}</h1>
-          </div>
-
-          {userCtx.isAuthenticated ? (
-            <div className={classes.flexRowRigth}>
-              {isFavourite ? (
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={removeFavoriteHandler}
-                >
-                  Delete Favorite
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={addToFavoritesHandler}
-                  className="btn btn-success"
-                >
-                  Add Favorite
-                </button>
-              )}
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
+        <h1>{tvShowsDetails.title}</h1>
         <h6 className="fst-italic">{tvShowsDetails.genreNames}</h6>
         <div>
           <p>{tvShowsDetails.synopsis}</p>
         </div>
         <div>{`⭐ ${Math.round(tvShowsDetails.average * 10) / 10}`}</div>
         <div>{`📅 ${tvShowsDetails.release_date}`}</div>
-        <div>{`📺 ${tvShowsDetails.numberOfSeasons} ${tvShowsDetails.numberOfSeasons>1? "seasons": "season"} / ${tvShowsDetails.numberOfEpisodes} ${tvShowsDetails.numberOfEpisodes>1? "episodes": "episode"}`}</div>
+        <div>{`📺 ${tvShowsDetails.numberOfSeasons} ${
+          tvShowsDetails.numberOfSeasons > 1 ? "seasons" : "season"
+        } / ${tvShowsDetails.numberOfEpisodes} ${
+          tvShowsDetails.numberOfEpisodes > 1 ? "episodes" : "episode"
+        }`}</div>
       </div>
+      {userCtx.isAuthenticated ? (
+        <div className={classes.favoriteItem}>
+          {isFavourite ? (
+            <span onClick={removeFavoriteHandler}>
+              <i
+                className="bi bi-heart-fill"
+                style={{
+                  color: "red",
+                  WebkitTextStrokeWidth: "1.5px",
+                  fontSize: "30px",
+                  cursor: "pointer",
+                }}
+              ></i>
+            </span>
+          ) : (
+            <span onClick={addToFavoritesHandler}>
+              <i
+                className="bi bi-heart"
+                style={{
+                  color: "red",
+                  WebkitTextStrokeWidth: "1.5px",
+                  fontSize: "30px",
+                  cursor: "pointer",
+                }}
+              ></i>
+            </span>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
