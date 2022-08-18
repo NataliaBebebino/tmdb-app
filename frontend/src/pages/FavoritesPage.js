@@ -18,7 +18,7 @@ const FavoritesPage = () => {
   return (
     <div>
       <h1>My favorites</h1>
-      <MediaCardList mediaData={favorites} />;
+      <MediaCardList mediaData={favorites} />
     </div>
   );
 };
