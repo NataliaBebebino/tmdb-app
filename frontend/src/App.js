@@ -14,7 +14,7 @@ import { TvShowSearchContextProvider } from "./store/search-tv-show-context";
 
 function App() {
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <MainNavigation />
       <MovieSearchContextProvider>
         <Routes>
@@ -34,7 +34,9 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
-      <Footer />
+      <div className="mt-auto">
+        <Footer />
+      </div>
     </div>
   );
 }
