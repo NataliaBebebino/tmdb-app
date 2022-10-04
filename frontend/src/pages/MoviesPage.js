@@ -3,6 +3,8 @@ import MediaCardList from "../components/MediaCardList";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
 import MovieSearchContext from "../store/search-movie-context";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MoviesPage = () => {
   const [movieList, setMovieList] = useState([]);
@@ -30,6 +32,10 @@ const MoviesPage = () => {
         });
 
         setMovieList(movies);
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Searching movies failed");
       });
   };
 

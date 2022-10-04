@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import UserContext from "../store/users-context";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -41,6 +43,7 @@ const LoginPage = () => {
         }
       })
       .catch((error) => {
+        console.log(error.toJSON());
         setErrorMessage(error.message);
       });
   };
@@ -48,7 +51,7 @@ const LoginPage = () => {
   return (
     <div className="container h-100 mt-3">
       <div className="row h-100 justify-content-center align-items-center">
-      <h1 className="text-center">Login</h1>
+        <h1 className="text-center">Login</h1>
         <div className="col-10 col-md-8 col-lg-6">
           <Form style={{ maxWidth: 500 }} onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicEmail">

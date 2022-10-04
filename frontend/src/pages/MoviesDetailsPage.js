@@ -6,6 +6,8 @@ import UserContext from "../store/users-context";
 import classes from "./DetailsPage.module.css";
 import posterNotAvailableDetailPage from "../assets/posterNotAvailableDetailPage.jpg";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MoviesDetailsPage = () => {
   const [moviesDetails, setMoviesDetails] = useState({});
@@ -26,6 +28,10 @@ const MoviesDetailsPage = () => {
       url: "http://localhost:5000/favorites/new",
     }).then((res) => {
       setIsFavourite(true);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Adding favorite failed");
     });
   };
 
@@ -42,6 +48,10 @@ const MoviesDetailsPage = () => {
       url: "http://localhost:5000/favorites/remove",
     }).then((res) => {
       setIsFavourite(false);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Removing favorite failed");
     });
   };
 
@@ -57,6 +67,10 @@ const MoviesDetailsPage = () => {
       url: "http://localhost:5000/favorites/isFavorite",
     }).then((res) => {
       setIsFavourite(res.data);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Getting favorite failed");
     });
   }, [params.id, userCtx.isAuthenticated]);
 
@@ -86,6 +100,10 @@ const MoviesDetailsPage = () => {
           release_date: response.data.release_date,
           duration: duration,
         });
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Getting movie detail failed");
       });
   }, [params.id]);
 

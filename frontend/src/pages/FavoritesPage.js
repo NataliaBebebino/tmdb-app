@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import MediaCardList from "../components/MediaCardList";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -10,9 +12,14 @@ const FavoritesPage = () => {
       method: "GET",
       withCredentials: true,
       url: "http://localhost:5000/favorites/getMyFavorites",
-    }).then((response) => {
-      setFavorites(response.data);
-    });
+    })
+      .then((response) => {
+        setFavorites(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Getting favorites failed");
+      });
   }, []);
 
   return (

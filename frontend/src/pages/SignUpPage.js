@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const [enteredUsername, setEnteredUsername] = useState("");
@@ -65,6 +67,7 @@ const SignUpPage = () => {
         }
       })
       .catch((error) => {
+        console.log(error.toJSON());
         setErrorMessage(error.message);
       });
   };

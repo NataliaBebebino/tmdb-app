@@ -3,6 +3,8 @@ import MediaCardList from "../components/MediaCardList";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
 import TvShowSearchContext from "../store/search-tv-show-context";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TVShowsPage = () => {
   const [tvShowList, setTvShowList] = useState([]);
@@ -30,6 +32,10 @@ const TVShowsPage = () => {
         });
 
         setTvShowList(tvShows);
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Getting tv show detail failed");
       });
   };
 

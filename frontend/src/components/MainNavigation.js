@@ -5,13 +5,15 @@ import Navbar from "react-bootstrap/Navbar";
 import UserContext from "../store/users-context";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainNavigation = () => {
   const userCtx = useContext(UserContext);
   const [expanded, setExpanded] = useState(false);
 
   const logoutHandler = () => {
-    setExpanded(false)
+    setExpanded(false);
     Axios({
       method: "POST",
       url: "http://localhost:5000/users/logout",
@@ -19,6 +21,10 @@ const MainNavigation = () => {
       .then((res) => {
         userCtx.logout();
       })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Logout failed");
+      });
   };
 
   return (

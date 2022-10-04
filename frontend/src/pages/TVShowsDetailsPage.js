@@ -6,6 +6,8 @@ import classes from "./DetailsPage.module.css";
 import Axios from "axios";
 import posterNotAvailableDetailPage from "../assets/posterNotAvailableDetailPage.jpg";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TVShowsDetailsPage = () => {
   const [tvShowsDetails, setTvShowsDetails] = useState({});
@@ -26,6 +28,10 @@ const TVShowsDetailsPage = () => {
       url: "http://localhost:5000/favorites/new",
     }).then((res) => {
       setIsFavourite(true);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Adding favorite failed");
     });
   };
 
@@ -41,6 +47,10 @@ const TVShowsDetailsPage = () => {
       url: "http://localhost:5000/favorites/remove",
     }).then((res) => {
       setIsFavourite(false);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Removing favorite failed");
     });
   };
 
@@ -56,6 +66,10 @@ const TVShowsDetailsPage = () => {
       url: "http://localhost:5000/favorites/isFavorite",
     }).then((res) => {
       setIsFavourite(res.data);
+    })
+    .catch(function (error) {
+      console.log(error.toJSON());
+      toast.error("Getting favorite failed");
     });
   }, [params.id, userCtx.isAuthenticated]);
 
@@ -81,6 +95,10 @@ const TVShowsDetailsPage = () => {
           numberOfEpisodes: response.data.number_of_episodes,
           release_date: response.data.first_air_date,
         });
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        toast.error("Getting movie detail failed");
       });
   }, [params.id]);
 
