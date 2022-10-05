@@ -24,12 +24,13 @@ const LoginPage = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       data: {
         email: enteredEmail,
         password: enteredPassword,
       },
-      withCredentials: true,
       url: `${process.env.REACT_APP_BACKEND_URL}/users/login`
     })
       .then((res) => {

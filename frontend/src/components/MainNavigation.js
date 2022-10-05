@@ -15,6 +15,8 @@ const MainNavigation = () => {
   const logoutHandler = () => {
     setExpanded(false);
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       url: `${process.env.REACT_APP_BACKEND_URL}/users/logout`,
     })

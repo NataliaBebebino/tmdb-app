@@ -9,8 +9,9 @@ const FavoritesPage = () => {
 
   useEffect(() => {
     Axios({
-      method: "GET",
       withCredentials: true,
+      credentials: "include",
+      method: "GET",
       url: `${process.env.REACT_APP_BACKEND_URL}/favorites/getMyFavorites`,
     })
       .then((response) => {

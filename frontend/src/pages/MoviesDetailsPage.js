@@ -19,12 +19,13 @@ const MoviesDetailsPage = () => {
   const addToFavoritesHandler = (event) => {
     event.preventDefault(); // take a look at this line of code later
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       data: {
         mediaId: params.id,
         type: "movie",
       },
-      withCredentials: true,
       url: `${process.env.REACT_APP_BACKEND_URL}/favorites/new`,
     }).then((res) => {
       setIsFavourite(true);
@@ -39,12 +40,13 @@ const MoviesDetailsPage = () => {
   const removeFavoriteHandler = (event) => {
     event.preventDefault(); // take a look at this line of code later
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       data: {
         mediaId: params.id,
         type: "movie",
       },
-      withCredentials: true,
       url: `${process.env.REACT_APP_BACKEND_URL}/favorites/remove`,
     }).then((res) => {
       setIsFavourite(false);
@@ -58,12 +60,13 @@ const MoviesDetailsPage = () => {
   useEffect(() => {
     if (!userCtx.isAuthenticated) return;
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       data: {
         mediaId: params.id,
         type: "movie",
       },
-      withCredentials: true,
       url: `${process.env.REACT_APP_BACKEND_URL}/favorites/isFavorite`,
     }).then((res) => {
       setIsFavourite(res.data);

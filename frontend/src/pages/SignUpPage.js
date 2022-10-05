@@ -48,13 +48,14 @@ const SignUpPage = () => {
     if (!submitOK) return;
 
     Axios({
+      withCredentials: true,
+      credentials: "include",
       method: "POST",
       data: {
         userName: enteredUsername,
         email: enteredEmail,
         password: enteredPassword,
       },
-      withCredentials: true,
       url: `${process.env.REACT_APP_BACKEND_URL}/users/new`,
     })
       .then((res) => {
