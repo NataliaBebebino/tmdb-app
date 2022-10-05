@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.11.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "nataliabebebino",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
