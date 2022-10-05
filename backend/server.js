@@ -6,6 +6,7 @@ const routes = require("./routes/index");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const passport = require("passport");
 const session = require("express-session");
@@ -18,20 +19,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
 
 app.use(
   session({
-    secret: "secretcode",
+    secret: process.env.SESSION_SECRET_CODE,
     resave: true,
     saveUninitialized: true,
   })
 );
 
-app.use(cookieParser("secretcode"));
+app.use(cookieParser(process.env.SESSION_SECRET_CODE));
 app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
@@ -48,7 +49,7 @@ app.use((err, req, res, next) => {
 async function main() {
   try {
     await sequelize.sync({ force: false });
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
     false;
     console.log("Server is listening on port", 5000);
   } catch (error) {

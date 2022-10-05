@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const TVShowsPage = () => {
   const [tvShowList, setTvShowList] = useState([]);
   const tvShowSearchCtx = useContext(TvShowSearchContext);
-
   const searchTvShow = (enteredSearch) => {
     if (!enteredSearch) {
       return;
@@ -17,7 +16,7 @@ const TVShowsPage = () => {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/search/tv?api_key=2e023c6fdb74b3b2d57ea6c91d6c138f&query=${enteredSearch}`
+        `https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${enteredSearch}`
       )
       .then((response) => {
         let tvShows = response.data.results.map((item) => {

@@ -1,5 +1,6 @@
 const Favorite = require("../models/Favorite");
 const Axios = require("axios");
+require("dotenv").config();
 
 const addFavoriteToUser = (req, res) => {
   const { mediaId, type } = req.body;
@@ -59,7 +60,7 @@ const getFavorites = (req, res) => {
     for (let i = 0; i < favoritesList.length; ++i) {
       let favoriteItem = favoritesList[i];
 
-      let url = `https://api.themoviedb.org/3/${favoriteItem.type}/${favoriteItem.mediaId}?api_key=2e023c6fdb74b3b2d57ea6c91d6c138f`;
+      let url = `https://api.themoviedb.org/3/${favoriteItem.type}/${favoriteItem.mediaId}?api_key=${process.env.TMDB_API_KEY}`;
 
       let promise = Axios.get(url).then((response) => {
         let enrichedFavoriteItem = {

@@ -11,7 +11,7 @@ const FavoritesPage = () => {
     Axios({
       method: "GET",
       withCredentials: true,
-      url: "http://localhost:5000/favorites/getMyFavorites",
+      url: `${process.env.REACT_APP_BACKEND_URL}/favorites/getMyFavorites`,
     })
       .then((response) => {
         setFavorites(response.data);

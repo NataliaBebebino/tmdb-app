@@ -11,7 +11,7 @@ import SignUpPage from "./pages/SignUpPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import { MovieSearchContextProvider } from "./store/search-movie-context";
 import { TvShowSearchContextProvider } from "./store/search-tv-show-context";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (

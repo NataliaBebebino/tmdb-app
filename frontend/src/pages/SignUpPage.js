@@ -3,8 +3,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const [enteredUsername, setEnteredUsername] = useState("");
@@ -57,7 +55,7 @@ const SignUpPage = () => {
         password: enteredPassword,
       },
       withCredentials: true,
-      url: "http://localhost:5000/users/new",
+      url: `${process.env.REACT_APP_BACKEND_URL}/users/new`,
     })
       .then((res) => {
         if (res.data.ok) {

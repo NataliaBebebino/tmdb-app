@@ -4,8 +4,6 @@ import Form from "react-bootstrap/Form";
 import Axios from "axios";
 import UserContext from "../store/users-context";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -32,7 +30,7 @@ const LoginPage = () => {
         password: enteredPassword,
       },
       withCredentials: true,
-      url: "http://localhost:5000/users/login",
+      url: `${process.env.REACT_APP_BACKEND_URL}/users/login`
     })
       .then((res) => {
         if (res.data.ok) {

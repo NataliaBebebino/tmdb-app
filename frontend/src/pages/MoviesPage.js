@@ -17,7 +17,7 @@ const MoviesPage = () => {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=2e023c6fdb74b3b2d57ea6c91d6c138f&query=${enteredSearch}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${enteredSearch}`
       )
       .then((response) => {
         let movies = response.data.results.map((item) => {

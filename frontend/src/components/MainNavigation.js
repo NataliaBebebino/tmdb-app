@@ -16,7 +16,7 @@ const MainNavigation = () => {
     setExpanded(false);
     Axios({
       method: "POST",
-      url: "http://localhost:5000/users/logout",
+      url: `${process.env.REACT_APP_BACKEND_URL}/users/logout`,
     })
       .then((res) => {
         userCtx.logout();

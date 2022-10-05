@@ -25,7 +25,7 @@ const TVShowsDetailsPage = () => {
         type: "tv",
       },
       withCredentials: true,
-      url: "http://localhost:5000/favorites/new",
+      url: `${process.env.REACT_APP_BACKEND_URL}/favorites/new`,
     }).then((res) => {
       setIsFavourite(true);
     })
@@ -44,7 +44,7 @@ const TVShowsDetailsPage = () => {
         type: "tv",
       },
       withCredentials: true,
-      url: "http://localhost:5000/favorites/remove",
+      url: `${process.env.REACT_APP_BACKEND_URL}/favorites/remove`,
     }).then((res) => {
       setIsFavourite(false);
     })
@@ -63,7 +63,7 @@ const TVShowsDetailsPage = () => {
         type: "tv",
       },
       withCredentials: true,
-      url: "http://localhost:5000/favorites/isFavorite",
+      url: `${process.env.REACT_APP_BACKEND_URL}/favorites/isFavorite`,
     }).then((res) => {
       setIsFavourite(res.data);
     })
@@ -76,7 +76,7 @@ const TVShowsDetailsPage = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/tv/${params.id}?api_key=2e023c6fdb74b3b2d57ea6c91d6c138f`
+        `https://api.themoviedb.org/3/tv/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
       )
       .then((response) => {
         let genreNames = response.data.genres
