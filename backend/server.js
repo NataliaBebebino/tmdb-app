@@ -28,13 +28,13 @@ app.use(
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET_CODE,
+    secret: "secretcode",
     resave: true,
     saveUninitialized: true,
   })
 );
 
-app.use(cookieParser(process.env.SESSION_SECRET_CODE));
+app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
