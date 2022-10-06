@@ -31,6 +31,13 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      // Note: Standards related to the Cookie SameSite attribute recently changed such that:
+      // The cookie-sending behavior if SameSite is not specified is SameSite=Lax. Previously the default was that cookies were sent for all requests.
+      // Cookies with SameSite=None must now also specify the Secure attribute (they require a secure context/HTTPS).
+      // Cookies from the same domain are no longer considered to be from the same site if sent using a different scheme (http: or https:).
+      sameSite: "none",
+    },
   })
 );
 
