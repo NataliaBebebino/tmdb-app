@@ -37,6 +37,7 @@ app.use(
       // Cookies with SameSite=None must now also specify the Secure attribute (they require a secure context/HTTPS).
       // Cookies from the same domain are no longer considered to be from the same site if sent using a different scheme (http: or https:).
       sameSite: "none",
+      secure: true
     },
   })
 );
